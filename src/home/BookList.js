@@ -6,7 +6,7 @@ class BookList extends Component{
     constructor(props){
         super(props);
         this.state = {
-            books: null
+            books: {}
         }
         ;
     }
@@ -19,7 +19,7 @@ class BookList extends Component{
 
     render(){
         const {books} = this.state;
-        if ( ! books){
+        if ( Object.keys(books).length === 0 && books.constructor === Object){
             return (
                 <section>
                     Loading ...
@@ -28,11 +28,8 @@ class BookList extends Component{
         }else{
             return (
                 <section className="container">
-                    <div className="row">
-                        {books.map(book => (
-                                <Book book={book} />
-                            )
-                        )}
+                    <div className="row" >
+                        {books.map(book => (<Book key={book.id} book={book} />))}
                     </div>
                 </section>
             );
